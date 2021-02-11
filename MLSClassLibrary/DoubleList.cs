@@ -44,5 +44,16 @@ namespace MLSClassLibrary
             }
         }
 
+        public T Buscar(T nodo) 
+        {
+            if (empty(raiz))
+            {
+
+            }
+            else 
+            {
+
+            }
+        }
     }
 }
