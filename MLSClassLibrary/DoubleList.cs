@@ -44,23 +44,14 @@ namespace MLSClassLibrary
                 }
             }
         }
-
         public T Buscar(T FoundNodo, Delegate Condicion) 
         {
-            bool Found = false;
-            if (raiz!=null)
-            {
-                while (raiz.Next != null && Found != true)
-                {
-                    if (Convert.ToInt16(Condicion.DynamicInvoke(FoundNodo,raiz.Next.Nodo)) == 0)
-                        return FoundNodo;
-                    Previous = raiz.Next;
-                }
-            }
-            else
+            if (Convert.ToInt16(Condicion.DynamicInvoke(FoundNodo, raiz.Next.Nodo)) == 0)
             {
                 return FoundNodo;
             }
+            else
+                return default;
         }
     }
 }
