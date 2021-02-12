@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Laboratorio1.Models;
+using Laboratorio1.Helpers;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Web;
 
 namespace Laboratorio1.Controllers
 {
@@ -22,7 +26,56 @@ namespace Laboratorio1.Controllers
         {
             return View();
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(IFormCollection collection) //Create list C# linkedlist
+        {
+            try
+            {
+                var NewPlayer = new Models.Jugador
+                {
+                    Name = collection["Name"],
+                    Surname = collection["Surname"],
+                    Salary = Convert.ToDouble(collection["Salary"]),
+                    Position = collection["Position"],
+                    Club = collection["Club"]
+                };
+                Singletton.Instance.PlayerList.AddLast(NewPlayer);
+                return View();
 
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public IActionResult CreateGeneric()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateGeneric(IFormCollection collection) //Create DobleList
+        {
+                return View();
+            
+        }
+            public IActionResult FileCSV()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult FileCSV(HttpPostedFileBase postedFile) // File CSV
+        {
+            string filepath = string.Empty;
+            if (postedFile!=null)
+            {
+                
+            }
+            return RedirectToAction(nameof(Create));
+        }
         public IActionResult Privacy()
         {
             return View();
