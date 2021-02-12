@@ -8,6 +8,12 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="LibreriaClases">
+      <HintPath>..\..\LibreriaClases\LibreriaClases\bin\Debug\LibreriaClases.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 
 
 </Project>

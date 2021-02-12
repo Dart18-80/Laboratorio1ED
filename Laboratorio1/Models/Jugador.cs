@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Laboratorio1.Models
 {
-    public class Jugador : IComparable<Jugador>
+    public class Jugador : IComparable
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -48,7 +48,7 @@ namespace Laboratorio1.Models
             return String.Compare(Jugador1.Club, Jugador2.Club);
         }
 
-        public int CompareTo(Jugador other)
+        public int CompareTo(object obj)
         {
             throw new NotImplementedException();
         }

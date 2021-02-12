@@ -10,13 +10,14 @@ using Laboratorio1.Helpers;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Web;
+using LibreriaClases;
 
 
 namespace Laboratorio1.Controllers
 {
     public class HomeController : Controller
     {
-
+        DoubleList<Jugador> Nueva = new DoubleList<Jugador>(); //LLamado a los procedimientos de DoubleList
 
         private readonly ILogger<HomeController> _logger;
 
