@@ -17,7 +17,7 @@ namespace MLSClassLibrary
 
         public bool empty (DoubleList<T> raiz) 
         {
-            if (raiz == null)
+            if (raiz.Nodo == null)
                 return true;
             else
                 return false;
@@ -45,23 +45,16 @@ namespace MLSClassLibrary
             }
         }
 
-        public T Buscar(T FoundNodo) 
+        public T Buscar(T FoundNodo, Delegate Condicion) 
         {
             bool Found = false;
             if (raiz!=null)
             {
-                while (Previous !=null && Found!=true)
+                while (raiz.Next != null && Found != true)
                 {
-                    if (raiz.Previous== FoundNodo)
-                    {
-                        Found= true;
+                    if (Convert.ToInt16(Condicion.DynamicInvoke(FoundNodo,raiz.Next.Nodo)) == 0)
                         return FoundNodo;
-                    }
                     Previous = raiz.Next;
-                }
-                if (!Found)
-                {
-                 
                 }
             }
             else
