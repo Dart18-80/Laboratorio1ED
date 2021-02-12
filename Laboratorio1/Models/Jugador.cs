@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,9 +23,9 @@ namespace Laboratorio1.Models
         public string Position { get; set; }
         public string Club { get; set; }
 
-        public int CompareTo(Jugador other, Delegate Condicion)
+        public int CompareTo(Jugador Jugador1, Jugador other, Delegate Condicion)
         {
-            return Convert.ToInt32(Condicion.DynamicInvoke(this , other));
+            return Convert.ToInt32(Condicion.DynamicInvoke(Jugador1 , other));
         }
 
         public static int CompareByName(Jugador Jugador1, Jugador Jugador2)
@@ -48,7 +49,7 @@ namespace Laboratorio1.Models
             return String.Compare(Jugador1.Club, Jugador2.Club);
         }
 
-        int IComparable<Jugador>.CompareTo(Jugador other)
+        public int CompareTo(Jugador other)
         {
             throw new NotImplementedException();
         }
