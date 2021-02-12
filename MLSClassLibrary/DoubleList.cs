@@ -12,7 +12,7 @@ namespace MLSClassLibrary
         public DoubleList<T> Previous { get; set;}
         public DoubleList<T> Next { get; set; }
 
-        public DoubleList<T> raiz = new DoubleList<T> { Nodo = default , Next = null, Previous = null};
+        private DoubleList<T> raiz = new DoubleList<T> { Nodo = default , Next = null, Previous = null};
 
 
         public bool empty (DoubleList<T> raiz) 

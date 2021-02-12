@@ -74,7 +74,7 @@ namespace Laboratorio1.Controllers
                     Position = collection["Position"],
                     Club = collection["Club"]
                 };
-                Nueva.Insert(NewPlayerGeneric, );
+                Nueva.Insert(NewPlayerGeneric, Nueva);
                 return View();
 
             }
