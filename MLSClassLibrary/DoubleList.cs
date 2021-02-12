@@ -46,12 +46,43 @@ namespace MLSClassLibrary
         }
         public T Buscar(T FoundNodo, Delegate Condicion) 
         {
-            if (Convert.ToInt16(Condicion.DynamicInvoke(FoundNodo, raiz.Next.Nodo)) == 0)
+            if (empty(raiz))
             {
-                return FoundNodo;
+                return default;
+            }
+            else 
+            {
+                if (Convert.ToInt16(Condicion.DynamicInvoke(FoundNodo, raiz.Nodo)) == 0)
+                {
+                    return raiz.Nodo;
+                }
+                else 
+                {
+                    CambioBuscar(FoundNodo, raiz, Condicion);
+                }
+                return default;
+            }
+        }
+
+        public T CambioBuscar(T NodoBuscar, DoubleList<T> Busquedad, Delegate Condicion) 
+        {
+            if (Busquedad.Next != null)
+            {
+
+                if (Convert.ToInt16(Condicion.DynamicInvoke(NodoBuscar, Busquedad.Next.Nodo)) == 0)
+                {
+                    return raiz.Next.Nodo;
+                }
+                else
+                {
+                    CambioBuscar(NodoBuscar, Busquedad.Next, Condicion);
+                }
+                return default;
             }
             else
+            {
                 return default;
+            }
         }
     }
 }
