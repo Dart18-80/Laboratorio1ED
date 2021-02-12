@@ -8,20 +8,19 @@ namespace Laboratorio1.Models
 {
     public class Jugador : IComparable<Jugador>
     {
-
-        public Jugador(string Nombre, string Apellido, double Salario, string Posicion, string Equipo)
-        {
-            this.Name = Nombre;
-            this.Surname = Apellido;
-            this.Salary = Salario;
-            this.Position = Posicion;
-            this.Club = Equipo; 
-        }
         public string Name { get; set; }
         public string Surname { get; set; }
         public double Salary { get; set; }
         public string Position { get; set; }
         public string Club { get; set; }
+        /*public Jugador(string Nombre, string Apellido, double Salario, string Posicion, string Equipo)
+        {
+            this.Name = Nombre;
+            this.Surname = Apellido;
+            this.Salary = Salario;
+            this.Position = Posicion;
+            this.Club = Equipo;
+        }*/
 
         public int CompareTo(Jugador Jugador1, Jugador other, Delegate Condicion)
         {

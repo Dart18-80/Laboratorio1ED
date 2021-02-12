@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Laboratorio1.Models;
 
 namespace Laboratorio1.Helpers
 {
@@ -16,7 +17,7 @@ namespace Laboratorio1.Helpers
                 return _instance;
             }
         }
-
+        public LinkedList<Jugador> PlayerList = new LinkedList<Jugador>();
 
     }
 }

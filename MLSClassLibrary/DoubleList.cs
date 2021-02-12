@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace MLSClassLibrary
 {
     class DoubleList <T> where T : IComparable
@@ -44,6 +45,29 @@ namespace MLSClassLibrary
             }
         }
 
-       
+        public T Buscar(T FoundNodo) 
+        {
+            bool Found = false;
+            if (raiz!=null)
+            {
+                while (Previous !=null && Found!=true)
+                {
+                    if (raiz.Previous== FoundNodo)
+                    {
+                        Found= true;
+                        return FoundNodo;
+                    }
+                    Previous = raiz.Next;
+                }
+                if (!Found)
+                {
+                 
+                }
+            }
+            else
+            {
+                return FoundNodo;
+            }
+        }
     }
 }
