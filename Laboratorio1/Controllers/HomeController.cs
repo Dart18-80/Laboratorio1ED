@@ -17,8 +17,7 @@ namespace Laboratorio1.Controllers
 {
     public class HomeController : Controller
     {
-        DoubleList<Jugador> Nueva = new DoubleList<Jugador>(); //LLamado a los procedimientos de DoubleList
-
+       
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -35,7 +34,7 @@ namespace Laboratorio1.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(IFormCollection collection) //Create list C# linkedlist
+        public IActionResult Create(IFormCollection collection) //  Crear lista c#
         {
             try
             {
@@ -60,13 +59,32 @@ namespace Laboratorio1.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult CreateGeneric(IFormCollection collection) //Create DobleList
+        public IActionResult CreateGeneric(IFormCollection collection)
         {
+            DoubleList<Jugador> Nueva = new DoubleList<Jugador>(); //LLamado a los procedimientos de DoubleList
+            try
+            {
+                var NewPlayerGeneric = new Models.Jugador
+                {
+                    Name = collection["Name"],
+                    Surname = collection["Surname"],
+                    Salary = Convert.ToDouble(collection["Salary"]),
+                    Position = collection["Position"],
+                    Club = collection["Club"]
+                };
+                Nueva.Insert(NewPlayerGeneric, );
                 return View();
-            
+
+            }
+            catch
+            {
+                return View();
+            }
+
         }
-            public IActionResult FileCSV()
+        public IActionResult FileCSV()
         {
             return View();
         }
