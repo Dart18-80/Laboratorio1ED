@@ -20,6 +20,7 @@ namespace Laboratorio1.Models
             this.Position = Posicion;
             this.Club = Equipo;
         }*/
+
         public int CompareTo(Jugador other, Delegate Condicion)
         {
             return Convert.ToInt32(Condicion.DynamicInvoke(this , other));

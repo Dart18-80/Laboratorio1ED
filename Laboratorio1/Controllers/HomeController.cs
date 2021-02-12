@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Web;
 
+
 namespace Laboratorio1.Controllers
 {
     public class HomeController : Controller
@@ -67,10 +68,10 @@ namespace Laboratorio1.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult FileCSV(HttpPostedFileBase postedFile) // File CSV
+        public IActionResult FileCSV(List<IFormFile> Files) // File CSV
         {
             string filepath = string.Empty;
-            if (postedFile!=null)
+            if (Files!=null)
             {
                 
             }
@@ -80,7 +81,10 @@ namespace Laboratorio1.Controllers
         {
             return View();
         }
-
+        public IActionResult ListPlayer() //Player List c#
+        {
+            return View(Singletton.Instance.PlayerList);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
