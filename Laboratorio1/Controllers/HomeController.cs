@@ -89,23 +89,55 @@ namespace Laboratorio1.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult FileCSV(List<IFormFile> Files) // File CSV
+        public async Task<ActionResult> FileCSV(IFormFile postedfile) // File CSV
         {
             string filepath = string.Empty;
-            if (Files!=null)
+            if (postedfile != null)
             {
-                
+                string path = Path.Combine("~/Upload/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                filepath = path + Path.GetFileName(postedfile.FileName);
+                string extension = Path.GetExtension(postedfile.FileName);
+
+                string CsvData = System.IO.File.ReadAllText(filepath);
+                foreach (string row in CsvData.Split('\n'))
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        Singletton.Instance.PlayerList.AddLast(new Jugador { 
+                        Club=row.Split(',')[0],
+                        Surname= row.Split(',')[1],
+                        Name = row.Split(',')[2],
+                        Position=row.Split(',')[3],
+                        Salary=Convert.ToDouble(row.Split(',')[4])
+                        });
+                    }
+                }
             }
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction(nameof(ListPlayer));
         }
         public IActionResult Privacy()
         {
             return View();
         }
-        public IActionResult ListPlayer() //Player List c#
+    
+        public async Task<IActionResult> ListPlayer(string searchstring) //Player List c#
         {
+            
+            ViewData["CurrentFilter"] = searchstring;
+      
             return View(Singletton.Instance.PlayerList);
         }
+
+
+
+
+
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
