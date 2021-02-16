@@ -13,8 +13,22 @@
 <form asp-action="ListPlayer" method="get">
     <div class="from-action no-gutters">
         <p>
-            Search By Name: <input type="text" name="searchstring" value="@ViewData["CurrentFilter"]"/>
-            <input type="submit" value="Buscar" class="btn-info"/>
+            Search By Name: <input type="text" name="SName" value="@ViewData["CurrentFilterName"]" /><br />
+            Search By Sourname: <input type="text" name="SSour" value="@ViewData["CurrentFilterSuor"]" /><br />
+            Search By Position: <select name="SPosition" value="@ViewData["CurrentFilterPosition"]">
+                <option>M</option>
+                <option>F</option>
+                <option>D</option>
+                <option>GK</option>
+                <option>D-M</option>
+                <option>D-F</option>
+                <option>F-D</option>
+                <option>F-M</option>
+                <option>M-D</option>
+                <option>M-F</option>
+            </select><br />
+            Search By Club: <input type="text" name="SClub" value="@ViewData["CurrentFilterClub"]" /><br />
+            <input type="submit" value="Buscar" class="btn-info" />
             <a asp-action="ListPlayer">All List of Player</a>
         </p>
     </div>

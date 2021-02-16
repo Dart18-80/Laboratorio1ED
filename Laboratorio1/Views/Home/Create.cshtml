@@ -35,7 +35,18 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Position" class="control-label"></label>
-                    <input asp-for="Position" class="form-control" />
+                    <select class="form-control" asp-for="Position">
+                        <option>M</option>
+                        <option>F</option>
+                        <option>D</option>
+                        <option>GK</option>
+                        <option>D-M</option>
+                        <option>D-F</option>
+                        <option>F-D</option>
+                        <option>F-M</option>
+                        <option>M-D</option>
+                        <option>M-F</option>
+                    </select>
                     <span asp-validation-for="Position" class="text-danger"></span>
                 </div>
                 <div class="form-group">
