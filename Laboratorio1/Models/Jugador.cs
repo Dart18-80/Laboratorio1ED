@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -21,7 +22,9 @@ namespace Laboratorio1.Models
             this.Position = Posicion;
             this.Club = Equipo;
         }*/
-
+        public IFormFile FileC { get; set; }
+        public int Id { get; set; }
+        public static int cont = 0;
         public int CompareTo(Jugador Jugador1, Jugador other, Delegate Condicion)
         {
             return Convert.ToInt32(Condicion.DynamicInvoke(Jugador1 , other));

@@ -1,19 +1,32 @@
 ﻿@model Laboratorio1.Models.Jugador
 
-@{
-    ViewData["Title"] = "Create";
-}
+
 
 <h1>Create</h1>
 
 <h4>Jugador</h4>
 <hr />
-@using (Html.BeginForm("FileCsv", "Home", FormMethod.Post, new { enctype="multipart/from-data"}))
-{
-<input type="File" name="postedfile"  />
-
-<input type="submit" value="Importar" />
-}
+<form enctype="multipart/form-data" asp-controller="home" asp-action="create" method="post" class="mt-3">
+    <div class="form-group row" >
+        <label asp-for="FileC" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <div class="custom-file">
+                <input asp-for="FileC" class="form-control custom-file-input" />
+                <label class="custom-file-label" >Choose File.......</label >
+            </div>
+        </div>
+    </div>
+    @section Scripts{ 
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var FileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(FileName);
+                });
+            });
+        </script>
+        }
+</form>
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Create">
@@ -65,6 +78,4 @@
     <a href="https://localhost:44370/Home/ListPlayer" class="btn btn-info">Player List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+

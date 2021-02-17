@@ -11,16 +11,17 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Web;
 using MLSClassLibrary;
+using Microsoft.AspNetCore.Hosting;
 
 
 namespace Laboratorio1.Controllers
 {
     public class HomeController : Controller
     {
-       
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IHostingEnvironment hostingEnvironment1;
+        public HomeController(ILogger<HomeController> logger,
+                              IHostingEnvironment hostingEnvironment)
         {
             _logger = logger;
         }
@@ -36,6 +37,7 @@ namespace Laboratorio1.Controllers
         [HttpPost]
         public IActionResult Create(IFormCollection collection) //  Crear lista c#
         {
+           
             try
             {
                 var NewPlayer = new Models.Jugador
@@ -44,8 +46,10 @@ namespace Laboratorio1.Controllers
                     Surname = collection["Surname"],
                     Salary = Convert.ToDouble(collection["Salary"]),
                     Position = collection["Position"],
-                    Club = collection["Club"]
+                    Club = collection["Club"],
+                    Id = Convert.ToInt32(Jugador.cont++),
                 };
+                
                 Singletton.Instance.PlayerList.AddLast(NewPlayer);
                 return View();
 
@@ -63,7 +67,6 @@ namespace Laboratorio1.Controllers
         [HttpPost]
         public IActionResult CreateGeneric(IFormCollection collection)
         {
-            DoubleList<Jugador> LlamarDouble = new DoubleList<Jugador>();
             try
             {
                 var NewPlayerGeneric = new Models.Jugador
@@ -74,7 +77,6 @@ namespace Laboratorio1.Controllers
                     Position = collection["Position"],
                     Club = collection["Club"]
                 };
-                LlamarDouble.Insert(NewPlayerGeneric, null);
                 return View();
 
             }
@@ -83,41 +85,6 @@ namespace Laboratorio1.Controllers
                 return View();
             }
 
-        }
-        public IActionResult FileCSV()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<ActionResult> FileCSV(IFormFile postedfile) // File CSV
-        {
-            string filepath = string.Empty;
-            if (postedfile != null)
-            {
-                string path = Path.Combine("~/Upload/");
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-                filepath = path + Path.GetFileName(postedfile.FileName);
-                string extension = Path.GetExtension(postedfile.FileName);
-
-                string CsvData = System.IO.File.ReadAllText(filepath);
-                foreach (string row in CsvData.Split('\n'))
-                {
-                    if (!string.IsNullOrEmpty(row))
-                    {
-                        Singletton.Instance.PlayerList.AddLast(new Jugador { 
-                        Club=row.Split(',')[0],
-                        Surname= row.Split(',')[1],
-                        Name = row.Split(',')[2],
-                        Position=row.Split(',')[3],
-                        Salary=Convert.ToDouble(row.Split(',')[4])
-                        });
-                    }
-                }
-            }
-            return RedirectToAction(nameof(ListPlayer));
         }
         public IActionResult Privacy()
         {
@@ -134,7 +101,6 @@ namespace Laboratorio1.Controllers
             ViewData["CurrentFilterSalary"] = SSalary;
             ViewData["CurrentFilterCheck"] = Check;
             Singletton.Instance.Search.Clear();
-            var nombre = Singletton.Instance.PlayerList.FirstOrDefault(x => x.Name == SName);
 
             if (SSour!=null)
             {
@@ -219,13 +185,34 @@ namespace Laboratorio1.Controllers
             return View(Singletton.Instance.PlayerList);
 
         }
-
-
-
-
-
-
-
+        public IActionResult Edit(int id)
+        {
+            var EditPlayer = Singletton.Instance.PlayerList.FirstOrDefault(x => x.Id == id);
+            return View(EditPlayer);
+        }
+        [HttpPost]
+        public IActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                var NewPlayerEdit = new Models.Jugador
+                {
+                    Name = collection["Name"],
+                    Surname = collection["Surname"],
+                    Salary = Convert.ToDouble(collection["Salary"]),
+                    Position = collection["Position"],
+                    Club = collection["Club"],
+                    Id = Convert.ToInt32(id)
+                };
+                Singletton.Instance.PlayerList.Remove(Singletton.Instance.PlayerList.FirstOrDefault(x => x.Id == id));
+                Singletton.Instance.PlayerList.AddFirst(NewPlayerEdit);
+                return RedirectToAction("ListPlayer");
+            }
+            catch (Exception)
+            {
+                return View();
+            }           
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
