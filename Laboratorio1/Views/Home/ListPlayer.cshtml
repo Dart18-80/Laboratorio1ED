@@ -16,6 +16,7 @@
             Search By Name: <input type="text" name="SName" value="@ViewData["CurrentFilterName"]" /><br />
             Search By Sourname: <input type="text" name="SSour" value="@ViewData["CurrentFilterSuor"]" /><br />
             Search By Position: <select name="SPosition" value="@ViewData["CurrentFilterPosition"]">
+                <option> </option>
                 <option>M</option>
                 <option>F</option>
                 <option>D</option>
@@ -28,6 +29,13 @@
                 <option>M-F</option>
             </select><br />
             Search By Club: <input type="text" name="SClub" value="@ViewData["CurrentFilterClub"]" /><br />
+            Search By Salary: <input type="text" name="SSalary" value="@ViewData["CurrentFilterSalary"]" />
+            <select name="Check" value="@ViewData["CurrentFilterCheck"]">
+                <option> </option>
+                <option>Less</option>
+                <option>Equal</option>
+                <option>More</option>
+            </select><br />
             <input type="submit" value="Buscar" class="btn-info" />
             <a asp-action="ListPlayer">All List of Player</a>
         </p>
