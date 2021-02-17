@@ -10,8 +10,7 @@ using Laboratorio1.Helpers;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Web;
-using LibreriaClases;
-
+using MLSClassLibrary;
 
 namespace Laboratorio1.Controllers
 {
@@ -63,7 +62,7 @@ namespace Laboratorio1.Controllers
         [HttpPost]
         public IActionResult CreateGeneric(IFormCollection collection)
         {
-            DoubleList<Jugador> Nueva = new DoubleList<Jugador>(); //LLamado a los procedimientos de DoubleList
+            DoubleList<Jugador> Llamado = new DoubleList<Jugador>();
             try
             {
                 var NewPlayerGeneric = new Models.Jugador
@@ -74,7 +73,7 @@ namespace Laboratorio1.Controllers
                     Position = collection["Position"],
                     Club = collection["Club"]
                 };
-                Nueva.Insert(NewPlayerGeneric, null);
+                Llamado.Insert(NewPlayerGeneric, null);
                 return View();
 
             }

@@ -50,7 +50,12 @@ namespace Laboratorio1.Models
 
         public int CompareTo(object obj)
         {
-            throw new NotImplementedException();
+            if (Convert.ToInt16(this.CompareTo(obj)) > 0)
+                return 1;
+            else if (Convert.ToInt16(this.CompareTo(obj)) < 0)
+                return -1;
+            else
+                return 0;
         }
     }
 }

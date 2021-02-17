@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,13 +9,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="LibreriaClases">
-      <HintPath>..\..\LibreriaClases\LibreriaClases\bin\Debug\LibreriaClases.dll</HintPath>
-    </Reference>
+    <Folder Include="Upload\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Upload\" />
+    <Reference Include="MLSClassLibrary">
+      <HintPath>..\MLSClassLibrary\bin\Debug\netcoreapp3.1\MLSClassLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 
