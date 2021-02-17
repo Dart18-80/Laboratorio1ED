@@ -12,6 +12,7 @@ using System.IO;
 using System.Web;
 using MLSClassLibrary;
 
+
 namespace Laboratorio1.Controllers
 {
     public class HomeController : Controller
@@ -62,7 +63,7 @@ namespace Laboratorio1.Controllers
         [HttpPost]
         public IActionResult CreateGeneric(IFormCollection collection)
         {
-            DoubleList<Jugador> Llamado = new DoubleList<Jugador>();
+            DoubleList<Jugador> LlamarDouble = new DoubleList<Jugador>();
             try
             {
                 var NewPlayerGeneric = new Models.Jugador
@@ -73,7 +74,7 @@ namespace Laboratorio1.Controllers
                     Position = collection["Position"],
                     Club = collection["Club"]
                 };
-                Llamado.Insert(NewPlayerGeneric, null);
+                
                 return View();
 
             }
