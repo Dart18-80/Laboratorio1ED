@@ -74,7 +74,7 @@ namespace Laboratorio1.Controllers
                     Position = collection["Position"],
                     Club = collection["Club"]
                 };
-                
+                LlamarDouble.Insert(NewPlayerGeneric, null);
                 return View();
 
             }

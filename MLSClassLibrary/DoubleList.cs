@@ -22,7 +22,7 @@ namespace MLSClassLibrary
             else
                 return false;
         }
-        public static void Insert(T Nuevo, DoubleList<T> raiz)
+        public void Insert(T Nuevo, DoubleList<T> raiz)
         {
             if (Empty(raiz))
             {
