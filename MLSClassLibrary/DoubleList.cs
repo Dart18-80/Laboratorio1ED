@@ -10,6 +10,8 @@ namespace MLSClassLibrary
     {
         public Nodo<T> Header { get; set; }
         public Nodo<T> Tail { get; set; }
+        
+        List<T> DataNode = new List<T>();
 
         public DoubleList()
         {
@@ -34,6 +36,18 @@ namespace MLSClassLibrary
                 };
                 oldHead.Previous = Header;
             }
+        }
+        public List<T> Mostrar(Nodo<T> Cabeza) 
+        {
+            if (Cabeza != null)
+            {
+                DataNode.Add(Cabeza.Data);
+                Mostrar(Cabeza.Next);
+                return null;
+            }
+            else
+                return DataNode;
+
         }
         /*
         public T Buscar(T FoundNodo, Delegate Condicion)
