@@ -72,28 +72,37 @@ namespace Laboratorio1.Controllers
             if (model.FileC != null)
             {
                 string uploadsfolder= Path.Combine(hostingEnvironment.WebRootPath, "Upload");
-                uniqueFileName=Guid.NewGuid().ToString() + "_" + model.FileC.FileName;
+                uniqueFileName=model.FileC.FileName;
                 string filepath=Path.Combine(uploadsfolder, uniqueFileName);
-                model.FileC.CopyTo(new FileStream(filepath, FileMode.Create));
-                string csvData = System.IO.File.ReadAllText(filepath);
-                foreach (string row in csvData.Split('\n'))
+                if (!System.IO.File.Exists(filepath))
                 {
-                    if (!string.IsNullOrEmpty(row))
-                    {
-                        Singletton.Instance.PlayerList.AddLast(new Jugador
-                        {
-                            Club = row.Split(',')[0],
-                            Surname = row.Split(',')[1],
-                            Name = row.Split(',')[2],
-                            Position = row.Split(',')[3],
-                            Salary = Convert.ToDouble(row.Split(',')[4]),
-                            Id= Convert.ToInt32(Jugador.cont++)
-                        });
-                    }
+                    model.FileC.CopyTo(new FileStream(filepath, FileMode.Create));
                 }
+               
+                    string ccc = System.IO.File.ReadAllText(filepath);
+                    foreach (string row in ccc.Split('\n'))
+                    {
+                        if (!string.IsNullOrEmpty(row))
+                        {
+                            if (row.Split(',')[0]!="club")
+                            {
+                                Singletton.Instance.PlayerList.AddLast(new Jugador
+                                {
+                                    Club = row.Split(',')[0],
+                                    Surname = row.Split(',')[1],
+                                    Name = row.Split(',')[2],
+                                    Position = row.Split(',')[3],
+                                    Salary = Convert.ToDouble(row.Split(',')[4]),
+                                    Id = Convert.ToInt32(Jugador.cont++)
+                                });
+                            }
+                          
+                        }
+                    }
+                    return RedirectToAction("ListPlayer");
             }
-            
-            return RedirectToAction("ListPlayer");
+            return View();
+
         }
         [HttpPost]
         public IActionResult CreateGeneric(IFormCollection collection)
@@ -211,11 +220,89 @@ namespace Laboratorio1.Controllers
 
         }
 
-        public IActionResult ListPlayerGeneric(string SSearch, double SSalary, string Check) //Player List Generic
+        public IActionResult ListPlayerGeneric(string Check, double SSalary, string SSearch, string SType) //Player List Generic
         {
+            ViewData["CurrentFilterType"] = SType;
             ViewData["CurrentFilterSearch"] = SSearch;
             ViewData["CurrentFilterSalary"] = SSalary;
             ViewData["CurrentFilterCheck"] = Check;
+            
+
+            switch (SType)
+            {
+                case "Name":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Name == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+
+                case "Surname":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Surname == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+
+                case "Club":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Club == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+
+                case "Position":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Position == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+            }
+
+            switch (Check)
+            {
+                case "Less":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Salary < SSalary)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+
+                case "Equal":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Salary == SSalary)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+
+                case "More":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Salary > SSalary)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+            }
 
             Singletton.Instance.Procedimiento.Mostrar(Singletton.Instance.listaJugador.Header, Singletton.Instance.Nueva);
             return View(Singletton.Instance.Nueva);

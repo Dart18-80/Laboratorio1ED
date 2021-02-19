@@ -8,7 +8,14 @@
 <form asp-action="ListPlayerGeneric" method="get">
     <div class="from-action no-gutters">
         <p>
-            Search <input type="text" name="SSearch" value="@ViewData["CurrentFilterSearch"]" /><br />
+            Search By <select name="SType" value="@ViewData["CurrentFilterType"]">
+                <option> </option>
+                <option>Name</option>
+                <option>Surname</option>
+                <option>Club</option>
+                <option>Position</option>
+            </select>
+            :<input type="text" name="SSearch" value="@ViewData["CurrentFilterSearch"]" /><br />
 
             Search By Salary:<input type="text" name="SSalary" value="@ViewData["CurrentFilterSalary"]" />
             <select name="Check" value="@ViewData["CurrentFilterCheck"]">
@@ -19,7 +26,7 @@
             </select>
             <br />
             <input type="submit" value="Buscar" class="btn-info" />
-            <a asp-action="ListPlayer">All List of Player</a>
+            <a asp-action="ListPlayerGeneric">All List of Player</a>
         </p>
     </div>
 </form>
