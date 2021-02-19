@@ -49,6 +49,27 @@ namespace MLSClassLibrary
                 return DataNode;
 
         }
+
+        public T Buscar(Nodo<T> Cabeza, T FoundNodo, Delegate Condicion) 
+        {
+            if (Cabeza == null)
+            {
+                return default;
+            }
+            else 
+            {
+                if (Convert.ToInt16(Condicion.DynamicInvoke(FoundNodo, Cabeza.Data)) == 0)
+                {
+                    return Cabeza.Data;
+                }
+                else 
+                {
+                    Buscar(Cabeza.Next, FoundNodo, Condicion);
+                    return default;
+                }
+            }
+        } 
+
         /*
         public T Buscar(T FoundNodo, Delegate Condicion)
         {
