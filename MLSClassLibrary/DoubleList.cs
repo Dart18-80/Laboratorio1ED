@@ -1,49 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MLSClassLibrary;
 
 
 namespace MLSClassLibrary
 {
     public class DoubleList <T> where T : IComparable
     {
+        public Nodo<T> Header { get; set; }
+        public Nodo<T> Tail { get; set; }
 
-        public  T Nodo { get; set; }
-        public  DoubleList<T> Previous { get; set; }
-        public  DoubleList<T> Next { get; set; }
-
-        public DoubleList<T> raiz = new DoubleList<T> { Nodo = default, Next = null, Previous = null };
-
-
-        public bool Empty(DoubleList<T> raiz)
+        public DoubleList()
         {
-            if (raiz.Nodo.Equals(default))
-                return true;
-            else
-                return false;
+            Header = null;
+            Tail = null;
         }
-        public void Insert(T Nuevo, DoubleList<T> raiz)
+
+        public void AddHead(T data)
         {
-            if (Empty(raiz))
+            if (Header == null)
             {
-                raiz.Nodo = Nuevo;
-                raiz.Next = null;
-                raiz.Previous = null;
+                Header = new Nodo<T>() { Data = data };
+                Tail = Header;
             }
             else
             {
-                DoubleList<T> NewNode = new DoubleList<T> { Nodo = Nuevo, Next = null, Previous = null };
-                if (raiz.Next.Nodo ==null)
+                var oldHead = Header;
+                Header = new Nodo<T>()
                 {
-                    raiz.Next = NewNode;
-                    NewNode.Previous = raiz;
-                }
-                else
-                {
-                    Insert(Nuevo, raiz.Next);
-                }
+                    Data = data,
+                    Next = oldHead
+                };
+                oldHead.Previous = Header;
             }
         }
+        /*
         public T Buscar(T FoundNodo, Delegate Condicion)
         {
             if (Empty(raiz))
@@ -64,6 +56,8 @@ namespace MLSClassLibrary
             }
         }
 
+       
+        
         public T CambioBuscar(T NodoBuscar, DoubleList<T> Busquedad, Delegate Condicion)
         {
             if (Busquedad.Next != null)
@@ -84,5 +78,7 @@ namespace MLSClassLibrary
                 return default;
             }
         }
+        */
     }
 }
+
