@@ -63,7 +63,6 @@ namespace Laboratorio1.Controllers
         [HttpPost]
         public IActionResult CreateGeneric(IFormCollection collection)
         {
-                DoubleList<Jugador> listaJugador = new DoubleList<Jugador>();
             try
             {
                 var NewPlayerGeneric = new Models.Jugador
@@ -75,7 +74,7 @@ namespace Laboratorio1.Controllers
                     Club = collection["Club"],
                     Id = Convert.ToInt32(Jugador.cont++)
                 };
-                listaJugador.AddHead(NewPlayerGeneric);
+                Singletton.Instance.listaJugador.AddHead(NewPlayerGeneric);
                 return View();
             }
             catch

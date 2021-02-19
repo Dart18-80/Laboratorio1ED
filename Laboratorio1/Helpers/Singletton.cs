@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Laboratorio1.Models;
+using MLSClassLibrary;
 
 namespace Laboratorio1.Helpers
 {
@@ -19,6 +20,8 @@ namespace Laboratorio1.Helpers
         }
         public LinkedList<Jugador> PlayerList = new LinkedList<Jugador>();
         public LinkedList<Jugador> Search = new LinkedList<Jugador>();
+        public DoubleList<Jugador> listaJugador = new DoubleList<Jugador>();
+
 
     }
 }
