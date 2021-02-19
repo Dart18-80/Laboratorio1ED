@@ -220,11 +220,89 @@ namespace Laboratorio1.Controllers
 
         }
 
-        public IActionResult ListPlayerGeneric(string SSearch, double SSalary, string Check) //Player List Generic
+        public IActionResult ListPlayerGeneric(string Check, double SSalary, string SSearch, string SType) //Player List Generic
         {
+            ViewData["CurrentFilterType"] = SType;
             ViewData["CurrentFilterSearch"] = SSearch;
             ViewData["CurrentFilterSalary"] = SSalary;
             ViewData["CurrentFilterCheck"] = Check;
+            
+
+            switch (SType)
+            {
+                case "Name":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Name == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+
+                case "Surname":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Surname == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+
+                case "Club":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Club == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+
+                case "Position":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Position == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+            }
+
+            switch (Check)
+            {
+                case "Less":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Salary < SSalary)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+
+                case "Equal":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Salary == SSalary)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+
+                case "More":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Salary > SSalary)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
+                    return View(Singletton.Instance.Search);
+            }
 
             Singletton.Instance.Procedimiento.Mostrar(Singletton.Instance.listaJugador.Header, Singletton.Instance.Nueva);
             return View(Singletton.Instance.Nueva);
