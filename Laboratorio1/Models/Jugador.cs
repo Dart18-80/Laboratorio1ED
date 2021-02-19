@@ -27,6 +27,7 @@ namespace Laboratorio1.Models
         public IFormFile FileC { get; set; }
         public int Id { get; set; }
         public static int cont = 0;
+
         public int CompareTo(Jugador Jugador1, Jugador other, Delegate Condicion)
         {
             return Convert.ToInt32(Condicion.DynamicInvoke(Jugador1 , other));
