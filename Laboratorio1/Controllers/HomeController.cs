@@ -75,7 +75,8 @@ namespace Laboratorio1.Controllers
                 uniqueFileName=Guid.NewGuid().ToString() + "_" + model.FileC.FileName;
                 string filepath=Path.Combine(uploadsfolder, uniqueFileName);
                 model.FileC.CopyTo(new FileStream(filepath, FileMode.Create));
-                foreach (string row in filepath.Split('\n'))
+                string csvData = System.IO.File.ReadAllText(filepath);
+                foreach (string row in csvData.Split('\n'))
                 {
                     if (!string.IsNullOrEmpty(row))
                     {
@@ -210,8 +211,12 @@ namespace Laboratorio1.Controllers
 
         }
 
-        public IActionResult ListPlayerGeneric() //Player List Generic
+        public IActionResult ListPlayerGeneric(string SSearch, double SSalary, string Check) //Player List Generic
         {
+            ViewData["CurrentFilterSearch"] = SSearch;
+            ViewData["CurrentFilterSalary"] = SSalary;
+            ViewData["CurrentFilterCheck"] = Check;
+
             Singletton.Instance.Procedimiento.Mostrar(Singletton.Instance.listaJugador.Header, Singletton.Instance.Nueva);
             return View(Singletton.Instance.Nueva);
         }
