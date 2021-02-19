@@ -37,7 +37,6 @@ namespace Laboratorio1.Controllers
         [HttpPost]
         public IActionResult Create(IFormCollection collection) //  Crear lista c#
         {
-           
             try
             {
                 var NewPlayer = new Models.Jugador
@@ -49,7 +48,6 @@ namespace Laboratorio1.Controllers
                     Club = collection["Club"],
                     Id = Convert.ToInt32(Jugador.cont++),
                 };
-                
                 Singletton.Instance.PlayerList.AddLast(NewPlayer);
                 return View();
 
@@ -67,6 +65,7 @@ namespace Laboratorio1.Controllers
         [HttpPost]
         public IActionResult CreateGeneric(IFormCollection collection)
         {
+            DoubleList<Jugador> ListaJugador = new DoubleList<Jugador>();
             try
             {
                 var NewPlayerGeneric = new Models.Jugador
@@ -78,8 +77,8 @@ namespace Laboratorio1.Controllers
                     Club = collection["Club"],
                     Id = Convert.ToInt32(Jugador.cont++)
                 };
+                ListaJugador.Insert(NewPlayerGeneric, null);
                 return View();
-
             }
             catch
             {
