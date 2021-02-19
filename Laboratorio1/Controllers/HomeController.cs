@@ -87,63 +87,56 @@ namespace Laboratorio1.Controllers
             return View();
         }
     
-        public async Task<IActionResult> ListPlayer(string SName, string Check, double SSalary, string SSour, string SPosition, string SClub) //Player List c#
+        public async Task<IActionResult> ListPlayer( string Check, double SSalary,  string SSearch, string SType) //Player List c#
         {
             
-            ViewData["CurrentFilterName"] = SName;
-            ViewData["CurrentFilterSuor"] = SSour;
-            ViewData["CurrentFilterPosition"] = SPosition;
-            ViewData["CurrentFilterClub"] = SClub;
+            ViewData["CurrentFilterType"] = SType;
+            ViewData["CurrentFilterSearch"] = SSearch;
             ViewData["CurrentFilterSalary"] = SSalary;
             ViewData["CurrentFilterCheck"] = Check;
             Singletton.Instance.Search.Clear();
 
-            if (SSour!=null)
+            switch (SType)
             {
-                for (int i = 0; i < Singletton.Instance.PlayerList.Count ; i++)
-                {
-                    if (Singletton.Instance.PlayerList.ElementAt(i).Surname == SSour)
+                case "Name":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
                     {
-                        Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Name == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
                     }
-                }
-                return View(Singletton.Instance.Search);
-            }
+                    return View(Singletton.Instance.Search);
 
-            if (SName != null)
-            {
-                for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
-                {
-                    if (Singletton.Instance.PlayerList.ElementAt(i).Name == SName)
+                case "Surname":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
                     {
-                        Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Surname == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
                     }
-                }
-                return View(Singletton.Instance.Search);
-            }
+                    return View(Singletton.Instance.Search);
 
-            if (SClub != null)
-            {
-                for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
-                {
-                    if (Singletton.Instance.PlayerList.ElementAt(i).Club == SClub)
+                case "Club":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
                     {
-                        Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Club == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
                     }
-                }
-                return View(Singletton.Instance.Search);
-            }
+                    return View(Singletton.Instance.Search);
 
-            if (SPosition != null)
-            {
-                for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
-                {
-                    if (Singletton.Instance.PlayerList.ElementAt(i).Position == SPosition)
+                case "Position":
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
                     {
-                        Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Position == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
                     }
-                }
-                return View(Singletton.Instance.Search);
+                    return View(Singletton.Instance.Search);
             }
 
             switch (Check)
