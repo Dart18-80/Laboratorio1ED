@@ -19,9 +19,7 @@ namespace Laboratorio1.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IHostingEnvironment hostingEnvironment1;
-        public HomeController(ILogger<HomeController> logger,
-                              IHostingEnvironment hostingEnvironment)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
@@ -65,7 +63,7 @@ namespace Laboratorio1.Controllers
         [HttpPost]
         public IActionResult CreateGeneric(IFormCollection collection)
         {
-            DoubleList<Jugador> ListaJugador = new DoubleList<Jugador>();
+                DoubleList<Jugador> listaJugador = new DoubleList<Jugador>();
             try
             {
                 var NewPlayerGeneric = new Models.Jugador
@@ -77,7 +75,7 @@ namespace Laboratorio1.Controllers
                     Club = collection["Club"],
                     Id = Convert.ToInt32(Jugador.cont++)
                 };
-                ListaJugador.Insert(NewPlayerGeneric, null);
+                listaJugador.Insert(NewPlayerGeneric, null);
                 return View();
             }
             catch
