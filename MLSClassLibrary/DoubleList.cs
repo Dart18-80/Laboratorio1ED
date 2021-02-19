@@ -12,12 +12,12 @@ namespace MLSClassLibrary
         public  DoubleList<T> Previous { get; set; }
         public  DoubleList<T> Next { get; set; }
 
-        public static DoubleList<T> raiz = new DoubleList<T> { Nodo = default, Next = null, Previous = null };
+        public DoubleList<T> raiz = new DoubleList<T> { Nodo = default, Next = null, Previous = null };
 
 
-        public static bool Empty(DoubleList<T> raiz)
+        public bool Empty(DoubleList<T> raiz)
         {
-            if (raiz.Nodo=null)
+            if (raiz.Nodo.Equals(default))
                 return true;
             else
                 return false;
