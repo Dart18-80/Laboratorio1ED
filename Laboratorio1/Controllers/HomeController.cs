@@ -18,9 +18,12 @@ namespace Laboratorio1.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IHostingEnvironment hostingEnvironment;
+        public HomeController(ILogger<HomeController> logger,
+                              IHostingEnvironment hostingEnvironment)
         {
             _logger = logger;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
@@ -43,7 +46,7 @@ namespace Laboratorio1.Controllers
                     Salary = Convert.ToDouble(collection["Salary"]),
                     Position = collection["Position"],
                     Club = collection["Club"],
-                    Id = Convert.ToInt32(Jugador.cont++),
+                    Id = Convert.ToInt32(Jugador.cont++)
                 };
                 Singletton.Instance.PlayerList.AddLast(NewPlayer);
                 return View();
@@ -58,7 +61,39 @@ namespace Laboratorio1.Controllers
         {
             return View();
         }
-
+        public IActionResult UploadFilecsv()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult UploadFilecsv(Jugador model)
+        {
+            string uniqueFileName = null;
+            if (model.FileC != null)
+            {
+                string uploadsfolder= Path.Combine(hostingEnvironment.WebRootPath, "Upload");
+                uniqueFileName=Guid.NewGuid().ToString() + "_" + model.FileC.FileName;
+                string filepath=Path.Combine(uploadsfolder, uniqueFileName);
+                model.FileC.CopyTo(new FileStream(filepath, FileMode.Create));
+                foreach (string row in filepath.Split('\n'))
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        Singletton.Instance.PlayerList.AddLast(new Jugador
+                        {
+                            Club = row.Split(',')[0],
+                            Surname = row.Split(',')[1],
+                            Name = row.Split(',')[2],
+                            Position = row.Split(',')[3],
+                            Salary = Convert.ToDouble(row.Split(',')[4]),
+                            Id= Convert.ToInt32(Jugador.cont++)
+                        });
+                    }
+                }
+            }
+            
+            return RedirectToAction("ListPlayer");
+        }
         [HttpPost]
         public IActionResult CreateGeneric(IFormCollection collection)
         {
