@@ -75,7 +75,8 @@ namespace Laboratorio1.Controllers
                     Surname = collection["Surname"],
                     Salary = Convert.ToDouble(collection["Salary"]),
                     Position = collection["Position"],
-                    Club = collection["Club"]
+                    Club = collection["Club"],
+                    Id = Convert.ToInt32(Jugador.cont++)
                 };
                 return View();
 
