@@ -212,7 +212,8 @@ namespace Laboratorio1.Controllers
 
         public IActionResult ListPlayerGeneric() //Player List Generic
         {
-            return View(Singletton.Instance.listaJugador);
+            Singletton.Instance.Procedimiento.Mostrar(Singletton.Instance.listaJugador.Header, Singletton.Instance.Nueva);
+            return View(Singletton.Instance.Nueva);
         }
         public IActionResult Edit(int id)
         {

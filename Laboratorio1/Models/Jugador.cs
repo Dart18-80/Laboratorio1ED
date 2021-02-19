@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
+using MLSClassLibrary;
 
 namespace Laboratorio1.Models
 {
@@ -60,5 +62,7 @@ namespace Laboratorio1.Models
             else
                 return 0;
         }
+
+        List<Jugador> ListaMostrada = new List<Jugador>();
     }
 }

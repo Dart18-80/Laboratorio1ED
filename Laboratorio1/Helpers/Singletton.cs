@@ -21,7 +21,8 @@ namespace Laboratorio1.Helpers
         public LinkedList<Jugador> PlayerList = new LinkedList<Jugador>();
         public LinkedList<Jugador> Search = new LinkedList<Jugador>();
         public DoubleList<Jugador> listaJugador = new DoubleList<Jugador>();
-
+        public Nodo<Jugador> Procedimiento = new Nodo<Jugador>();
+        public List<Jugador> Nueva = new List<Jugador>();
     }
 
 }
