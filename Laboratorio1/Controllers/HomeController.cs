@@ -10,7 +10,6 @@ using Laboratorio1.Helpers;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Web;
-using MLSClassLibrary;
 using Microsoft.AspNetCore.Hosting;
 
 
@@ -181,6 +180,11 @@ namespace Laboratorio1.Controllers
             }
             return View(Singletton.Instance.PlayerList);
 
+        }
+
+        public IActionResult ListPlayerGeneric() //Player List Generic
+        {
+            return View(Singletton.Instance.listaJugador);
         }
         public IActionResult Edit(int id)
         {

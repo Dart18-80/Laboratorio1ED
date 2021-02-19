@@ -16,12 +16,6 @@
     <ProjectReference Include="..\MLSClassLibrary\MLSClassLibrary.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="MLSClassLibrary">
-      <HintPath>..\MLSClassLibrary\bin\Debug\netcoreapp3.1\MLSClassLibrary.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 
 
 </Project>
