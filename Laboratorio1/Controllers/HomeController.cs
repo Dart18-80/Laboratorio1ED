@@ -75,7 +75,7 @@ namespace Laboratorio1.Controllers
                     Club = collection["Club"],
                     Id = Convert.ToInt32(Jugador.cont++)
                 };
-                listaJugador.Insert(NewPlayerGeneric, null);
+                listaJugador.AddHead(NewPlayerGeneric);
                 return View();
             }
             catch
