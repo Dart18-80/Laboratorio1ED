@@ -17,7 +17,7 @@ namespace MLSClassLibrary
 
         public static bool Empty(DoubleList<T> raiz)
         {
-            if (raiz.Nodo == null)
+            if (raiz.Nodo=null)
                 return true;
             else
                 return false;
@@ -33,7 +33,7 @@ namespace MLSClassLibrary
             else
             {
                 DoubleList<T> NewNode = new DoubleList<T> { Nodo = Nuevo, Next = null, Previous = null };
-                if (raiz.Next == null)
+                if (raiz.Next.Nodo ==null)
                 {
                     raiz.Next = NewNode;
                     NewNode.Previous = raiz;
