@@ -25,6 +25,8 @@ namespace Laboratorio1.Helpers
         public Nodo<Jugador> Procedimiento = new Nodo<Jugador>();
         public List<Jugador> Nueva = new List<Jugador>();
         public Stopwatch TiempoListaC = new Stopwatch();
+        public List<string> TiemposC;
+        public List<string> TiemposE;
         public Stopwatch TiempoListaEnlazada = new Stopwatch();
     }
 
