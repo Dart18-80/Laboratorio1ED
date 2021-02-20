@@ -264,7 +264,8 @@ namespace Laboratorio1.Controllers
             return View(Singletton.Instance.PlayerList);
 
         }
-
+        Jugador LlamadoClass = new Jugador();
+        delegate int Delagados(Jugador Jug, string jug1);
         public IActionResult ListPlayerGeneric(string Check, double SSalary, string SSearch, string SType) //Player List Generic
         {
             ViewData["CurrentFilterType"] = SType;
@@ -274,37 +275,23 @@ namespace Laboratorio1.Controllers
             switch (SType)
             {
                 case "Name":
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header,SSearch,);
+                    Delagados InvocarNombre = new Delagados(LlamadoClass.CompareByName);
+                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarNombre);
                     return View(Singletton.Instance.Search);
 
                 case "Surname":
-                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
-                    {
-                        if (Singletton.Instance.PlayerList.ElementAt(i).Surname == SSearch)
-                        {
-                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
-                        }
-                    }
+                    Delagados InvocarApellido = new Delagados(LlamadoClass.CompareBySurname);
+                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarApellido);
                     return View(Singletton.Instance.Search);
 
                 case "Club":
-                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
-                    {
-                        if (Singletton.Instance.PlayerList.ElementAt(i).Club == SSearch)
-                        {
-                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
-                        }
-                    }
+                    Delagados InvocarClub = new Delagados(LlamadoClass.CompareByClub);
+                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarClub);
                     return View(Singletton.Instance.Search);
 
                 case "Position":
-                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
-                    {
-                        if (Singletton.Instance.PlayerList.ElementAt(i).Position == SSearch)
-                        {
-                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
-                        }
-                    }
+                    Delagados InvocarPosicion = new Delagados(LlamadoClass.CompareByPosition);
+                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarPosicion);
                     return View(Singletton.Instance.Search);
             }
 
