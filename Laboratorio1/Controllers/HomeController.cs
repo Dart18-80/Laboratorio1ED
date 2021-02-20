@@ -55,7 +55,10 @@ namespace Laboratorio1.Controllers
                     Club = collection["Club"],
                     Id = Convert.ToInt32(Jugador.cont++)
                 };
+                Singletton.Instance.TiempoListaC.Start();
                 Singletton.Instance.PlayerList.AddLast(NewPlayer);
+                Singletton.Instance.TiempoListaC.Stop();
+                Singletton.Instance.TiemposC.Add(Convert.ToString(Singletton.Instance.TiempoListaC.Elapsed.TotalMilliseconds));
                 return View();
 
             }
@@ -82,7 +85,10 @@ namespace Laboratorio1.Controllers
                     Club = collection["Club"],
                     Id = Convert.ToInt32(Jugador.cont++)
                 };
+                Singletton.Instance.TiempoListaEnlazada.Start();
                 Singletton.Instance.listaJugador.AddHead(NewPlayerGeneric);
+                Singletton.Instance.TiempoListaEnlazada.Stop();
+                Singletton.Instance.TiemposE.Add(Convert.ToString(Singletton.Instance.TiempoListaEnlazada.Elapsed.TotalMilliseconds));
                 return View();
             }
             catch
@@ -193,6 +199,7 @@ namespace Laboratorio1.Controllers
             ViewData["CurrentFilterSalary"] = SSalary;
             ViewData["CurrentFilterCheck"] = Check;
             Singletton.Instance.Search.Clear();
+            Singletton.Instance.TiempoListaC.Start();
             switch (SType)
             {
                 case "Name":
@@ -203,6 +210,8 @@ namespace Laboratorio1.Controllers
                             Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
                         }
                     }
+                    Singletton.Instance.TiempoListaC.Stop();
+                    Singletton.Instance.TiemposC.Add(Convert.ToString(Singletton.Instance.TiempoListaC.Elapsed.TotalMilliseconds));
                     return View(Singletton.Instance.Search);
 
                 case "Surname":
@@ -213,6 +222,8 @@ namespace Laboratorio1.Controllers
                             Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
                         }
                     }
+                    Singletton.Instance.TiempoListaC.Stop();
+                    Singletton.Instance.TiemposC.Add(Convert.ToString(Singletton.Instance.TiempoListaC.Elapsed.TotalMilliseconds));
                     return View(Singletton.Instance.Search);
 
                 case "Club":
@@ -223,6 +234,8 @@ namespace Laboratorio1.Controllers
                             Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
                         }
                     }
+                    Singletton.Instance.TiempoListaC.Stop();
+                    Singletton.Instance.TiemposC.Add(Convert.ToString(Singletton.Instance.TiempoListaC.Elapsed.TotalMilliseconds));
                     return View(Singletton.Instance.Search);
 
                 case "Position":
@@ -233,6 +246,8 @@ namespace Laboratorio1.Controllers
                             Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
                         }
                     }
+                    Singletton.Instance.TiempoListaC.Stop();
+                    Singletton.Instance.TiemposC.Add(Convert.ToString(Singletton.Instance.TiempoListaC.Elapsed.TotalMilliseconds));
                     return View(Singletton.Instance.Search);
             }
 
@@ -246,6 +261,8 @@ namespace Laboratorio1.Controllers
                             Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
                         }
                     }
+                    Singletton.Instance.TiempoListaC.Stop();
+                    Singletton.Instance.TiemposC.Add(Convert.ToString(Singletton.Instance.TiempoListaC.Elapsed.TotalMilliseconds));
                     return View(Singletton.Instance.Search);
 
                 case "Equal":
@@ -256,6 +273,8 @@ namespace Laboratorio1.Controllers
                             Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
                         }
                     }
+                    Singletton.Instance.TiempoListaC.Stop();
+                    Singletton.Instance.TiemposC.Add(Convert.ToString(Singletton.Instance.TiempoListaC.Elapsed.TotalMilliseconds));
                     return View(Singletton.Instance.Search);
 
                 case "More":
@@ -266,6 +285,8 @@ namespace Laboratorio1.Controllers
                             Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
                         }
                     }
+                    Singletton.Instance.TiempoListaC.Stop();
+                    Singletton.Instance.TiemposC.Add(Convert.ToString(Singletton.Instance.TiempoListaC.Elapsed.TotalMilliseconds));
                     return View(Singletton.Instance.Search);
             }
             return View(Singletton.Instance.PlayerList);
@@ -280,61 +301,39 @@ namespace Laboratorio1.Controllers
             ViewData["CurrentFilterSalary"] = SSalary;
             ViewData["CurrentFilterCheck"] = Check;
             Singletton.Instance.Nueva.Clear();
+            Singletton.Instance.TiempoListaEnlazada.Start();
             switch (SType)
             {
                 case "Name":
                     Delagados InvocarNombre = new Delagados(LlamadoClass.CompareByName);
                     Singletton.Instance.Procedimiento.MostrarNodo(Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarNombre),Singletton.Instance.Nueva);
+                    Singletton.Instance.TiempoListaEnlazada.Stop();
+                    Singletton.Instance.TiemposE.Add(Convert.ToString(Singletton.Instance.TiempoListaEnlazada.Elapsed.TotalMilliseconds));
                     return View(Singletton.Instance.Nueva);
 
                 case "Surname":
                     Delagados InvocarApellido = new Delagados(LlamadoClass.CompareBySurname);
                     Singletton.Instance.Procedimiento.MostrarNodo(Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarApellido),Singletton.Instance.Nueva);
+                    Singletton.Instance.TiempoListaEnlazada.Stop();
+                    Singletton.Instance.TiemposE.Add(Convert.ToString(Singletton.Instance.TiempoListaEnlazada.Elapsed.TotalMilliseconds));
                     return View(Singletton.Instance.Nueva);
 
                 case "Club":
                     Delagados InvocarClub = new Delagados(LlamadoClass.CompareByClub);
                     Singletton.Instance.Procedimiento.MostrarNodo(Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarClub),Singletton.Instance.Nueva);
+                    Singletton.Instance.TiempoListaEnlazada.Stop();
+                    Singletton.Instance.TiemposE.Add(Convert.ToString(Singletton.Instance.TiempoListaEnlazada.Elapsed.TotalMilliseconds));
                     return View(Singletton.Instance.Nueva);
 
                 case "Position":
                     Delagados InvocarPosicion = new Delagados(LlamadoClass.CompareByPosition);
                     Singletton.Instance.Procedimiento.MostrarNodo(Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarPosicion), Singletton.Instance.Nueva);
+                    Singletton.Instance.TiempoListaEnlazada.Stop();
+                    Singletton.Instance.TiemposE.Add(Convert.ToString(Singletton.Instance.TiempoListaEnlazada.Elapsed.TotalMilliseconds));
                     return View(Singletton.Instance.Nueva);
             }
 
-            switch (Check)
-            {
-                case "Less":
-                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
-                    {
-                        if (Singletton.Instance.PlayerList.ElementAt(i).Salary < SSalary)
-                        {
-                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
-                        }
-                    }
-                    return View(Singletton.Instance.Search);
-
-                case "Equal":
-                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
-                    {
-                        if (Singletton.Instance.PlayerList.ElementAt(i).Salary == SSalary)
-                        {
-                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
-                        }
-                    }
-                    return View(Singletton.Instance.Search);
-
-                case "More":
-                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
-                    {
-                        if (Singletton.Instance.PlayerList.ElementAt(i).Salary > SSalary)
-                        {
-                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
-                        }
-                    }
-                    return View(Singletton.Instance.Search);
-            }
+            
             Singletton.Instance.Procedimiento.Mostrar(Singletton.Instance.listaJugador.Header, Singletton.Instance.Nueva);
             return View(Singletton.Instance.Nueva);
         }
