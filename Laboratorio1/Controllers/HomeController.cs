@@ -327,6 +327,7 @@ namespace Laboratorio1.Controllers
                     }
                     return View(Singletton.Instance.Search);
             }
+            Singletton.Instance.Procedimiento.Mostrar(Singletton.Instance.listaJugador.Header, Singletton.Instance.Nueva);
             return View(Singletton.Instance.Nueva);
         }
         public IActionResult Edit(int id)
