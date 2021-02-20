@@ -15,7 +15,6 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Laboratorio1.Controllers
 {
-    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -265,35 +264,47 @@ namespace Laboratorio1.Controllers
             return View(Singletton.Instance.PlayerList);
 
         }
-        Jugador LlamadoClass = new Jugador();
-        delegate int Delagados(Jugador Jug, string jug1);
+
         public IActionResult ListPlayerGeneric(string Check, double SSalary, string SSearch, string SType) //Player List Generic
         {
             ViewData["CurrentFilterType"] = SType;
             ViewData["CurrentFilterSearch"] = SSearch;
             ViewData["CurrentFilterSalary"] = SSalary;
             ViewData["CurrentFilterCheck"] = Check;
-
             switch (SType)
             {
                 case "Name":
-                    Delagados InvocarNombre = new Delagados(LlamadoClass.CompareByName);
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header,SSearch,InvocarNombre);
+                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header,SSearch,);
                     return View(Singletton.Instance.Search);
 
                 case "Surname":
-                    Delagados InvocarApellido = new Delagados(LlamadoClass.CompareBySurname);
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarApellido);
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Surname == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
                     return View(Singletton.Instance.Search);
 
                 case "Club":
-                    Delagados InvocarClub = new Delagados(LlamadoClass.CompareByClub);
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarClub);
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Club == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
                     return View(Singletton.Instance.Search);
 
                 case "Position":
-                    Delagados InvocarPosicion = new Delagados(LlamadoClass.CompareByPosition);
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarPosicion);
+                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
+                    {
+                        if (Singletton.Instance.PlayerList.ElementAt(i).Position == SSearch)
+                        {
+                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
+                        }
+                    }
                     return View(Singletton.Instance.Search);
             }
 
@@ -360,6 +371,32 @@ namespace Laboratorio1.Controllers
             {
                 return View();
             }           
+        }
+        public IActionResult EditGeneric(int idgen)
+        {
+            var EditPlayer = Singletton.Instance.PlayerList.FirstOrDefault(x => x.Id == idgen);
+            return View(EditPlayer);
+        }
+        [HttpPost]
+        public IActionResult EditGeneric(int idgen, IFormCollection collection)
+        {
+            try
+            {
+                var NewPlayerEdit = new Models.Jugador
+                {
+                    Name = collection["Name"],
+                    Surname = collection["Surname"],
+                    Salary = Convert.ToDouble(collection["Salary"]),
+                    Position = collection["Position"],
+                    Club = collection["Club"],
+                    Id = Convert.ToInt32(id)
+                };
+                return View();
+            }
+            catch (Exception)
+            {
+                return View();
+            }
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
