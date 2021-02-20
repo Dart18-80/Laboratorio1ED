@@ -276,23 +276,19 @@ namespace Laboratorio1.Controllers
             {
                 case "Name":
                     Delagados InvocarNombre = new Delagados(LlamadoClass.CompareByName);
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarNombre);
-                    return View(Singletton.Instance.Search);
+                    return View(Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarNombre));
 
                 case "Surname":
                     Delagados InvocarApellido = new Delagados(LlamadoClass.CompareBySurname);
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarApellido);
-                    return View(Singletton.Instance.Search);
+                    return View(Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarApellido));
 
                 case "Club":
                     Delagados InvocarClub = new Delagados(LlamadoClass.CompareByClub);
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarClub);
-                    return View(Singletton.Instance.Search);
+                    return View(Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarClub));
 
                 case "Position":
                     Delagados InvocarPosicion = new Delagados(LlamadoClass.CompareByPosition);
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarPosicion);
-                    return View(Singletton.Instance.Search);
+                    return View(Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarPosicion));
             }
 
             switch (Check)
@@ -376,7 +372,7 @@ namespace Laboratorio1.Controllers
                     Salary = Convert.ToDouble(collection["Salary"]),
                     Position = collection["Position"],
                     Club = collection["Club"],
-                    Id = Convert.ToInt32(id)
+                    Id = Convert.ToInt32(idgen)
                 };
                 return View();
             }
