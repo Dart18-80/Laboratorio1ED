@@ -272,6 +272,7 @@ namespace Laboratorio1.Controllers
             ViewData["CurrentFilterSearch"] = SSearch;
             ViewData["CurrentFilterSalary"] = SSalary;
             ViewData["CurrentFilterCheck"] = Check;
+            Singletton.Instance.Nueva.Clear();
             switch (SType)
             {
                 case "Name":
