@@ -22,5 +22,10 @@ namespace MLSClassLibrary
             else
                 return Regreso;
         }
+        public List<T> MostrarNodo(T DataView, List<T> Regreso)
+        {
+            Regreso.Add(DataView);
+            return Regreso;
+        }
     }
 }

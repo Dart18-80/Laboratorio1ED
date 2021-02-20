@@ -276,23 +276,23 @@ namespace Laboratorio1.Controllers
             {
                 case "Name":
                     Delagados InvocarNombre = new Delagados(LlamadoClass.CompareByName);
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarNombre);
-                    return View(Singletton.Instance.Search);
+                    Singletton.Instance.Procedimiento.MostrarNodo(Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarNombre),Singletton.Instance.Nueva);
+                    return View(Singletton.Instance.Nueva);
 
                 case "Surname":
                     Delagados InvocarApellido = new Delagados(LlamadoClass.CompareBySurname);
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarApellido);
-                    return View(Singletton.Instance.Search);
+                    Singletton.Instance.Procedimiento.MostrarNodo(Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarApellido),Singletton.Instance.Nueva);
+                    return View(Singletton.Instance.Nueva);
 
                 case "Club":
                     Delagados InvocarClub = new Delagados(LlamadoClass.CompareByClub);
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarClub);
-                    return View(Singletton.Instance.Search);
+                    Singletton.Instance.Procedimiento.MostrarNodo(Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarClub),Singletton.Instance.Nueva);
+                    return View(Singletton.Instance.Nueva);
 
                 case "Position":
                     Delagados InvocarPosicion = new Delagados(LlamadoClass.CompareByPosition);
-                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarPosicion);
-                    return View(Singletton.Instance.Search);
+                    Singletton.Instance.Procedimiento.MostrarNodo(Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header, SSearch, InvocarPosicion), Singletton.Instance.Nueva);
+                    return View(Singletton.Instance.Nueva);
             }
 
             switch (Check)
@@ -327,8 +327,6 @@ namespace Laboratorio1.Controllers
                     }
                     return View(Singletton.Instance.Search);
             }
-
-            Singletton.Instance.Procedimiento.Mostrar(Singletton.Instance.listaJugador.Header, Singletton.Instance.Nueva);
             return View(Singletton.Instance.Nueva);
         }
         public IActionResult Edit(int id)
