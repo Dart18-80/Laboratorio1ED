@@ -61,49 +61,6 @@ namespace Laboratorio1.Controllers
         {
             return View();
         }
-        public IActionResult UploadFilecsv()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult UploadFilecsv(Jugador model)
-        {
-            string uniqueFileName = null;
-            if (model.FileC != null)
-            {
-                string uploadsfolder= Path.Combine(hostingEnvironment.WebRootPath, "Upload");
-                uniqueFileName=model.FileC.FileName;
-                string filepath=Path.Combine(uploadsfolder, uniqueFileName);
-                if (!System.IO.File.Exists(filepath))
-                {
-                    model.FileC.CopyTo(new FileStream(filepath, FileMode.Create));
-                }
-               
-                    string ccc = System.IO.File.ReadAllText(filepath);
-                    foreach (string row in ccc.Split('\n'))
-                    {
-                        if (!string.IsNullOrEmpty(row))
-                        {
-                            if (row.Split(',')[0]!="club")
-                            {
-                                Singletton.Instance.PlayerList.AddLast(new Jugador
-                                {
-                                    Club = row.Split(',')[0],
-                                    Surname = row.Split(',')[1],
-                                    Name = row.Split(',')[2],
-                                    Position = row.Split(',')[3],
-                                    Salary = Convert.ToDouble(row.Split(',')[4]),
-                                    Id = Convert.ToInt32(Jugador.cont++)
-                                });
-                            }
-                          
-                        }
-                    }
-                    return RedirectToAction("ListPlayer");
-            }
-            return View();
-
-        }
         [HttpPost]
         public IActionResult CreateGeneric(IFormCollection collection)
         {
@@ -127,6 +84,96 @@ namespace Laboratorio1.Controllers
             }
 
         }
+        public IActionResult UploadFilecsv()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult UploadFilecsv(Jugador model)
+        {
+            string uniqueFileName = null;
+            if (model.FileC != null)
+            {
+                string uploadsfolder= Path.Combine(hostingEnvironment.WebRootPath, "Upload");
+                uniqueFileName=model.FileC.FileName;
+                string filepath=Path.Combine(uploadsfolder, uniqueFileName);
+                if (!System.IO.File.Exists(filepath))
+                {
+                    using (var iNeedToLearnAboutDispose = new FileStream(filepath, FileMode.CreateNew))
+                    {
+                        model.FileC.CopyTo(iNeedToLearnAboutDispose);
+                    }
+                }
+                    string ccc = System.IO.File.ReadAllText(filepath);
+                    foreach (string row in ccc.Split('\n'))
+                    {
+                        if (!string.IsNullOrEmpty(row))
+                        {
+                            if (row.Split(',')[0]!="club")
+                            {
+                                Singletton.Instance.PlayerList.AddLast(new Jugador
+                                {
+                                    Club = row.Split(',')[0],
+                                    Surname = row.Split(',')[1],
+                                    Name = row.Split(',')[2],
+                                    Position = row.Split(',')[3],
+                                    Salary = Convert.ToDouble(row.Split(',')[4]),
+                                    Id = Convert.ToInt32(Jugador.cont++)
+                                });
+                            }
+                          
+                        }
+                    }
+                    return RedirectToAction("ListPlayer");
+            }
+            return View();
+        }
+        public IActionResult UploadFilecsvGeneric()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult UploadFilecsvGeneric(Jugador model)
+        {
+            string uniqueFileName = null;
+            if (model.FileC != null)
+            {
+                string uploadsfolder = Path.Combine(hostingEnvironment.WebRootPath, "Upload");
+                uniqueFileName = model.FileC.FileName;
+                string filepath = Path.Combine(uploadsfolder, uniqueFileName);
+                if (!System.IO.File.Exists(filepath))
+                {
+                    using (var iNeedToLearnAboutDispose = new FileStream(filepath, FileMode.CreateNew))
+                    {
+                        model.FileC.CopyTo(iNeedToLearnAboutDispose);
+                    }
+                }
+                string ccc = System.IO.File.ReadAllText(filepath);
+                foreach (string row in ccc.Split('\n'))
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        if (row.Split(',')[0] != "club")
+                        {
+                            Singletton.Instance.listaJugador.AddHead(new Jugador
+                            {
+                                Club = row.Split(',')[0],
+                                Surname = row.Split(',')[1],
+                                Name = row.Split(',')[2],
+                                Position = row.Split(',')[3],
+                                Salary = Convert.ToDouble(row.Split(',')[4]),
+                                Id = Convert.ToInt32(Jugador.cont++)
+                            });
+                        }
+
+                    }
+                }
+                return RedirectToAction("ListPlayerGeneric");
+            }
+            return View();
+
+        }
+        
         public IActionResult Privacy()
         {
             return View();
@@ -134,13 +181,11 @@ namespace Laboratorio1.Controllers
     
         public async Task<IActionResult> ListPlayer( string Check, double SSalary,  string SSearch, string SType) //Player List c#
         {
-            
             ViewData["CurrentFilterType"] = SType;
             ViewData["CurrentFilterSearch"] = SSearch;
             ViewData["CurrentFilterSalary"] = SSalary;
             ViewData["CurrentFilterCheck"] = Check;
             Singletton.Instance.Search.Clear();
-
             switch (SType)
             {
                 case "Name":
