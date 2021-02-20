@@ -231,13 +231,7 @@ namespace Laboratorio1.Controllers
             switch (SType)
             {
                 case "Name":
-                    for (int i = 0; i < Singletton.Instance.PlayerList.Count; i++)
-                    {
-                        if (Singletton.Instance.PlayerList.ElementAt(i).Name == SSearch)
-                        {
-                            Singletton.Instance.Search.AddLast(Singletton.Instance.PlayerList.ElementAt(i));
-                        }
-                    }
+                    Singletton.Instance.listaJugador.Buscar(Singletton.Instance.listaJugador.Header,SSearch,);
                     return View(Singletton.Instance.Search);
 
                 case "Surname":

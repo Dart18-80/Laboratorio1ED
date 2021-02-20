@@ -25,25 +25,25 @@ namespace Laboratorio1.Models
             return Convert.ToInt32(Condicion.DynamicInvoke(Jugador1 , other));
         }
 
-        public int CompareByName(Jugador Jugador1, Jugador Jugador2)
+        public int CompareByName(Jugador Jugador1,string Jugador2)
         {
-            return String.Compare(Jugador1.Name, Jugador2.Name);
+            return Jugador1.Name.CompareTo(Jugador2);
         }
-        public int CompareBySurname(Jugador Jugador1, Jugador Jugador2)
+        public int CompareBySurname(Jugador Jugador1, string Jugador2)
         {
-            return String.Compare(Jugador1.Surname, Jugador2.Surname);
+            return Jugador1.Surname.CompareTo(Jugador2);
         }
-        public int CompareBySalary(Jugador Jugador1, Jugador Jugador2)
+        public int CompareBySalary(Jugador Jugador1, double Jugador2)
         {
-            return Convert.ToInt32(Jugador1.Salary - Jugador2.Salary);
+            return Convert.ToInt32(Jugador1.Salary - Jugador2);
         }
-        public int CompareByPosition(Jugador Jugador1, Jugador Jugador2)
+        public int CompareByPosition(Jugador Jugador1, string Jugador2)
         {
-            return String.Compare(Jugador1.Position, Jugador2.Position);
+            return Jugador1.Position.CompareTo(Jugador2);
         }
-        public int CompareByClub(Jugador Jugador1, Jugador Jugador2)
+        public int CompareByClub(Jugador Jugador1, string Jugador2)
         {
-            return String.Compare(Jugador1.Club, Jugador2.Club);
+            return Jugador1.Club.CompareTo(Jugador2);
         }
 
         public int CompareTo(object obj)
