@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Laboratorio1.Models;
@@ -23,6 +24,8 @@ namespace Laboratorio1.Helpers
         public DoubleList<Jugador> listaJugador = new DoubleList<Jugador>();
         public Nodo<Jugador> Procedimiento = new Nodo<Jugador>();
         public List<Jugador> Nueva = new List<Jugador>();
+        public Stopwatch TiempoListaC = new Stopwatch();
+        public Stopwatch TiempoListaEnlazada = new Stopwatch();
     }
 
 }
