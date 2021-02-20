@@ -271,8 +271,6 @@ namespace Laboratorio1.Controllers
             ViewData["CurrentFilterSearch"] = SSearch;
             ViewData["CurrentFilterSalary"] = SSalary;
             ViewData["CurrentFilterCheck"] = Check;
-            
-
             switch (SType)
             {
                 case "Name":
@@ -379,6 +377,32 @@ namespace Laboratorio1.Controllers
             {
                 return View();
             }           
+        }
+        public IActionResult EditGeneric(int idgen)
+        {
+            var EditPlayer = Singletton.Instance.PlayerList.FirstOrDefault(x => x.Id == idgen);
+            return View(EditPlayer);
+        }
+        [HttpPost]
+        public IActionResult EditGeneric(int idgen, IFormCollection collection)
+        {
+            try
+            {
+                var NewPlayerEdit = new Models.Jugador
+                {
+                    Name = collection["Name"],
+                    Surname = collection["Surname"],
+                    Salary = Convert.ToDouble(collection["Salary"]),
+                    Position = collection["Position"],
+                    Club = collection["Club"],
+                    Id = Convert.ToInt32(id)
+                };
+                return View();
+            }
+            catch (Exception)
+            {
+                return View();
+            }
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
