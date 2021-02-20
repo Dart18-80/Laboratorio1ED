@@ -50,7 +50,7 @@ namespace MLSClassLibrary
 
         }
 
-        public T Buscar(Nodo<T> Cabeza, T FoundNodo, Delegate Condicion) 
+        public T Buscar(Nodo<T> Cabeza, string FoundNodo,Delegate Condicion) 
         {
             if (Cabeza == null)
             {
@@ -70,51 +70,50 @@ namespace MLSClassLibrary
                 }
             }
         } 
-
         /*
-        public T Buscar(T FoundNodo, Delegate Condicion)
-        {
-            if (Empty(raiz))
-            {
-                return default;
-            }
-            else
-            {
-                if (Convert.ToInt16(Condicion.DynamicInvoke(FoundNodo, raiz.Nodo)) == 0)
+                public T Buscar(T FoundNodo, Delegate Condicion)
                 {
-                    return raiz.Nodo;
+                    if (Empty(raiz))
+                    {
+                        return default;
+                    }
+                    else
+                    {
+                        if (Convert.ToInt16(Condicion.DynamicInvoke(FoundNodo, raiz.Nodo)) == 0)
+                        {
+                            return raiz.Nodo;
+                        }
+                        else
+                        {
+                            CambioBuscar(FoundNodo, raiz, Condicion);
+                        }
+                        return default;
+                    }
                 }
-                else
-                {
-                    CambioBuscar(FoundNodo, raiz, Condicion);
-                }
-                return default;
-            }
-        }
 
-       
-        
-        public T CambioBuscar(T NodoBuscar, DoubleList<T> Busquedad, Delegate Condicion)
-        {
-            if (Busquedad.Next != null)
-            {
 
-                if (Convert.ToInt16(Condicion.DynamicInvoke(NodoBuscar, Busquedad.Next.Nodo)) == 0)
+
+                public T CambioBuscar(T NodoBuscar, DoubleList<T> Busquedad, Delegate Condicion)
                 {
-                    return raiz.Next.Nodo;
+                    if (Busquedad.Next != null)
+                    {
+
+                        if (Convert.ToInt16(Condicion.DynamicInvoke(NodoBuscar, Busquedad.Next.Nodo)) == 0)
+                        {
+                            return raiz.Next.Nodo;
+                        }
+                        else
+                        {
+                            CambioBuscar(NodoBuscar, Busquedad.Next, Condicion);
+                        }
+                        return default;
+                    }
+                    else
+                    {
+                        return default;
+                    }
                 }
-                else
-                {
-                    CambioBuscar(NodoBuscar, Busquedad.Next, Condicion);
-                }
-                return default;
-            }
-            else
-            {
-                return default;
-            }
-        }
-        */
+                */
     }
 }
 
