@@ -375,7 +375,7 @@ namespace Laboratorio1.Controllers
                     Salary = Convert.ToDouble(collection["Salary"]),
                     Position = collection["Position"],
                     Club = collection["Club"],
-                    Id = Convert.ToInt32(id)
+                    Id = Convert.ToInt32(idgen)
                 };
                 return View();
             }
