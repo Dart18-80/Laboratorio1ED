@@ -58,6 +58,7 @@ namespace MLSClassLibrary
             }
             else 
             {
+
                 if (Convert.ToInt16(Condicion.DynamicInvoke(FoundNodo, Cabeza.Data)) == 0)
                 {
                     return Cabeza.Data;
