@@ -30,13 +30,24 @@ namespace Laboratorio1.Controllers
         {
             return View();
         }
-        public FileResult Index1()
+        public IActionResult Index1()
         {
-            var uploadsfolder = Path.Combine("ArchivodeTexto.txt", "Upload");
-            return File(uploadsfolder, "aplication/txt", "Archivo.txt");
+            string C1 = Singletton.Instance.TiempoListaC.ElapsedMilliseconds.ToString();
+            string C2 = Singletton.Instance.TiempoListaC.Elapsed.Seconds.ToString();
+            string C3 = Singletton.Instance.TiempoListaC.Elapsed.Minutes.ToString();
+            string E1 = Singletton.Instance.TiempoListaEnlazada.ElapsedMilliseconds.ToString();
+            string E2 = Singletton.Instance.TiempoListaEnlazada.Elapsed.Seconds.ToString();
+            string E3 = Singletton.Instance.TiempoListaEnlazada.Elapsed.Minutes.ToString();
+
+            ViewData["C1"] =C1;
+            ViewData["C2"] = C2;
+            ViewData["C3"] = C3;
+            ViewData["E1"] = E1;
+            ViewData["E2"] = E2;
+            ViewData["E3"] = E3;
+            return View();
         }
-        [HttpPost]
-        public IActionResult Create(IFormFile file)
+        public IActionResult Create()
         {
            
             return View();
