@@ -30,8 +30,15 @@ namespace Laboratorio1.Controllers
         {
             return View();
         }
-        public IActionResult Create()
+        public FileResult Index1()
         {
+            var uploadsfolder = Path.Combine("ArchivodeTexto.txt", "Upload");
+            return File(uploadsfolder, "aplication/txt", "Archivo.txt");
+        }
+        [HttpPost]
+        public IActionResult Create(IFormFile file)
+        {
+           
             return View();
         }
         [HttpPost]
